@@ -11,17 +11,10 @@ RUN yum install -y curl && \
     yum clean all && \
     rm -rf /workdir/node
 
-WORKDIR /workdir/sassc
-RUN git clone https://github.com/hcatlin/sassc.git /workdir/sassc && \
-    git clone https://github.com/hcatlin/libsass.git /workdir/libsass && \
-    sed -i '1iexport SASS_LIBSASS_PATH=/workdir/libsass' /workdir/sassc/Makefile && \
-    make && \
-    make install && \
-    rm -rf /workdir
-
+RUN rm -rf /workdir
 WORKDIR /app
 
 ONBUILD COPY . /app/
-ONBUILD RUN npm install
+ONBUILD RUN rm -rf node_modules && npm install
 ENTRYPOINT ["npm"]
 CMD ["start"]

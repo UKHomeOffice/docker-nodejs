@@ -11,7 +11,7 @@ The `ENTRYPOINT` and `CMD` is set to run `npm start`. You can override this if n
 ## Example
 
 ```shell
-FROM quay.io/ukhomeofficedigital/nodejs:v0.2.0
+FROM quay.io/ukhomeofficedigital/nodejs:v0.2.1
 
 ENTRYPOINT ["node"]
 CMD ["start.js"]

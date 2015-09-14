@@ -1,20 +1,15 @@
 FROM quay.io/ukhomeofficedigital/docker-centos-base
 
-RUN mkdir -p /workdir/node /workdir/sassc /workdir/libsass /app
+RUN mkdir -p /opt/nodejs /app
 
-WORKDIR /workdir/node
+WORKDIR /opt/nodejs
 RUN yum install -y curl && \
-    yum -y groupinstall "Development Tools" && \
-    curl http://nodejs.org/dist/node-latest.tar.gz | tar xz --strip-components=1 && \
-    ./configure && \
-    make install && \
-    yum clean all && \
-    rm -rf /workdir/node
-
-RUN rm -rf /workdir
+    curl https://nodejs.org/dist/latest/node-v4.0.0-linux-x64.tar.gz | tar xz --strip-components=1
+ENV PATH=${PATH}:/opt/nodejs/bin
 WORKDIR /app
 
 ONBUILD COPY . /app/
 ONBUILD RUN rm -rf node_modules && npm install
-ENTRYPOINT ["npm"]
+COPY entry-point.sh /entry-point.sh
+ENTRYPOINT ["/entry-point.sh"]
 CMD ["start"]

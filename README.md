@@ -2,20 +2,41 @@
 
 This is an onbuild container for Node.JS Projects.
 
-## Assumptions
+## Usage
 
-We can do an `npm install` in the root of the project.
+This docker container is an `ONBUILD`. Simply extend the Dockerfile in your application with this Dockerfile and your 
+project will be copied into the `/app` directory and have `npm install` run on it.
 
-The `ENTRYPOINT` and `CMD` is set to run `npm start`. You can override this if needed (see example).
+### Container Parameters
 
-## Example
+* `start`, `test` or `run` will run `npm COMMAND`
+
+The following command will run `npm start` on the code within the container
+
+So if your Dockerfile looks like this
+```shell
+FROM quay.io/ukhomeofficedigital/nodejs:v1.0.0
+
+CMD ["start"]
+```
+
+The following will run `npm start`.
 
 ```shell
-FROM quay.io/ukhomeofficedigital/nodejs:v0.2.1
-
-ENTRYPOINT ["node"]
-CMD ["start.js"]
+docker run your-docker-container:latest
 ```
+
+You may also run arbitrary commands
+
+```shell
+docker run -it quay.io/ukhomeofficedigital/nodejs:v1.0.0 bash
+```
+
+
+### Useful Directories
+
+* `/app` - Where you app will be copied to on build
+
 ## Contributing
 
 Feel free to submit pull requests and issues. If it's a particularly large PR, you may wish to 
@@ -28,6 +49,10 @@ By participating in this project you agree to abide by its terms.
 ## Versioning
 
 We use [SemVer](http://semver.org/) for the version tags available See the tags on this repository. 
+
+## Build With
+
+* Node v4.0.0
 
 ## Authors
 
@@ -45,4 +70,3 @@ This project is licensed under the MIT License - see the
 ## Acknowledgments
 
 * [NodeJS](https://nodejs.org/)
-* [libsass](https://github.com/sass/libsass)

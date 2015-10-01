@@ -4,7 +4,7 @@ RUN mkdir -p /opt/nodejs /app
 
 WORKDIR /opt/nodejs
 RUN yum install -y curl && \
-    curl https://nodejs.org/dist/latest/node-v4.0.0-linux-x64.tar.gz | tar xz --strip-components=1
+    curl https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-x64.tar.gz | tar xz --strip-components=1
 ENV PATH=${PATH}:/opt/nodejs/bin
 WORKDIR /app
 

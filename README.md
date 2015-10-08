@@ -1,6 +1,6 @@
 # Node.JS On Build Container
 
-[![Build Status](https://travis-ci.org/UKHomeOffice/docker-nodejs.svg?branch=master)](https://travis-ci.org/UKHomeOffice/docker-nodejs)
+[![Build Status](https://travis-ci.org/UKHomeOffice/docker-nodejs.svg?branch=added-travis)](https://travis-ci.org/UKHomeOffice/docker-nodejs)
 
 This is an onbuild container for Node.JS Projects.
 

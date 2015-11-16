@@ -54,7 +54,7 @@ We use [SemVer](http://semver.org/) for the version tags available See the tags 
 
 ## Build With
 
-* Node v4.0.0
+* Node v4.2.2
 
 ## Authors
 

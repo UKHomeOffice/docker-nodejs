@@ -10,6 +10,7 @@ RUN yum install -y git curl && \
 ENV PATH=${PATH}:/opt/nodejs/bin
 WORKDIR /app
 
+ONBUILD RUN yum update -y && yum clean
 ONBUILD COPY . /app/
 ONBUILD RUN rm -rf node_modules && npm install
 COPY entry-point.sh /entry-point.sh

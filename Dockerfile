@@ -11,8 +11,10 @@ ENV PATH=${PATH}:/opt/nodejs/bin
 WORKDIR /app
 
 ONBUILD RUN yum update -y && yum clean
-ONBUILD COPY . /app/
-ONBUILD RUN rm -rf node_modules && npm install
+ONBUILD COPY package.json /app
+ONBUILD RUN npm install
+ONBUILD COPY . /app
+
 COPY entry-point.sh /entry-point.sh
 ENTRYPOINT ["/entry-point.sh"]
 CMD ["start"]

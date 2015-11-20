@@ -66,7 +66,7 @@ in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the 
+This project is licensed under the GPL v2 License - see the 
 [LICENSE.md](https://github.com/UKHomeOffice/docker-nodejs/blob/master/LICENSE.md) file for details
 
 ## Acknowledgments

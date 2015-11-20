@@ -1,43 +1,17 @@
-# Node.JS On Build Container
+# Node.JS Container
 
-[![Build Status](https://travis-ci.org/UKHomeOffice/docker-nodejs.svg?branch=added-travis)](https://travis-ci.org/UKHomeOffice/docker-nodejs)
+[![Build Status](https://travis-ci.org/UKHomeOffice/docker-nodejs.svg?branch=added-travis)](https://travis-ci.org/UKHomeOffice/docker-nodejs) [![Docker Repository on Quay](https://quay.io/repository/ukhomeofficedigital/nodejs/status "Docker Repository on Quay")](https://quay.io/repository/ukhomeofficedigital/nodejs) [![GitHub version](https://badge.fury.io/gh/UKHomeOffice%2Fdocker-nodejs.svg)](https://badge.fury.io/gh/UKHomeOffice%2Fdocker-nodejs)
 
-This is an onbuild container for Node.JS Projects.
+This is a container for Node.JS Projects.
 
 ## Usage
 
-This docker container is an `ONBUILD`. Simply extend the Dockerfile in your application with this Dockerfile and your 
-project will be copied into the `/app` directory and have `npm install` run on it.
+This is a docker container to extend so you can run node in your applications. It is simply the base
+image with node.
 
 ### Container Parameters
 
-* `start`, `test` or `run` will run `npm COMMAND`
-
-The following command will run `npm start` on the code within the container
-
-So if your Dockerfile looks like this
-```shell
-FROM quay.io/ukhomeofficedigital/nodejs:v1.0.0
-
-CMD ["start"]
-```
-
-The following will run `npm start`.
-
-```shell
-docker run your-docker-container:latest
-```
-
-You may also run arbitrary commands
-
-```shell
-docker run -it quay.io/ukhomeofficedigital/nodejs:v1.0.0 bash
-```
-
-
-### Useful Directories
-
-* `/app` - Where you app will be copied to on build
+This container simply comes with node installed on it. Please add your own entrypoint.
 
 ## Contributing
 
@@ -58,9 +32,7 @@ We use [SemVer](http://semver.org/) for the version tags available See the tags 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of 
+See the list of 
 [contributors](https://github.com/UKHomeOffice/docker-nodejs/graphs/contributors) who participated 
 in this project.
 

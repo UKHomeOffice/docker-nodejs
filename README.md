@@ -2,12 +2,16 @@
 
 [![Build Status](https://travis-ci.org/UKHomeOffice/docker-nodejs.svg?branch=master)](https://travis-ci.org/UKHomeOffice/docker-nodejs)
 
-This is an onbuild container for Node.JS Projects.
+This is an onbuild container for Node.JS Projects. 
 
-## Usage
+## Usage  
 
 This docker container is an `ONBUILD`. Simply extend the Dockerfile in your application with this Dockerfile and your 
-project will be copied into the `/app` directory and have `npm install` run on it.
+project will be copied into the `/app` directory and have `npm install` run on it.  You must ensure that your 
+downstream images sets USER nodejs and additionally in rare cases any required permission beyond read.
+
+Please note, storing state on this container is not recommended, and logs should be written to stdout, thus adding further 
+permissions isn't something we'd normally envision.
 
 ### Container Parameters
 
@@ -17,22 +21,26 @@ The following command will run `npm start` on the code within the container
 
 So if your Dockerfile looks like this
 ```shell
-FROM quay.io/ukhomeofficedigital/nodejs:v1.0.0
+FROM quay.io/ukhomeofficedigital/nodejs:v3.0.0
 
+USER nodejs
 CMD ["start"]
 ```
 
-The following will run `npm start`.
+The following will run `npm start`:
 
 ```shell
 docker run your-docker-container:latest
 ```
 
-You may also run arbitrary commands
+You can also run arbitrary commands such as:
 
 ```shell
-docker run -it quay.io/ukhomeofficedigital/nodejs:v1.0.0 bash
+docker run your-docker-container:latest /opt/nodejs/bin/npm run 
 ```
+
+However, we'd prefered there was a standard way to start your app and thus,
+have settled on `npm start` being the canonical way to run your app.
 
 
 ### Useful Directories
@@ -54,7 +62,7 @@ We use [SemVer](http://semver.org/) for the version tags available See the tags 
 
 ## Build With
 
-* Node v4.2.2
+* Node v4.4.2
 
 ## Authors
 

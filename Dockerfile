@@ -1,21 +1,30 @@
-FROM quay.io/ukhomeofficedigital/centos-base
+FROM quay.io/ukhomeofficedigital/nodejs-base:v4.4.2
 
-RUN mkdir -p /opt/nodejs
-WORKDIR /opt/nodejs
+        # Copy downstream in which should help
+        # ensure everyone using this has a similar
+        # app structure.
+ONBUILD COPY . /app
 
-ENV NODE_VERSION v4.2.2
-RUN yum install -y git curl && \
-    curl https://nodejs.org/dist/${NODE_VERSION}/node-${NODE_VERSION}-linux-x64.tar.gz | tar xz --strip-components=1
+        # Ensure downstream builds are patched.
+ONBUILD RUN yum clean all && \
+            yum update -y && \
+            yum install -y git && \
+            yum clean all && \
+            rpm --rebuilddb && \
 
-RUN useradd app
-USER app
+        # Install node depenencies, make sure unit 
+        # tests are passing, then prune the dev deps.
+            rm -rf node_modules && \
+            npm --production=false install --unsafe-perm --no-optional && \
+            NODE_ENV=development npm test && \
+            npm prune --production && \
 
-ENV PATH=${PATH}:/opt/nodejs/bin
-WORKDIR /home/app
+        # Make sure only user nobody can access these 
+        # files, forcing downstream to set it.
+            chown -R nodejs:nodejs . 
 
-ONBUILD RUN yum clean all && yum update -y && yum clean all && rpm --rebuilddb
-ONBUILD COPY app .
-ONBUILD RUN rm -rf node_modules && npm install
-COPY entry-point.sh /entry-point.sh
-ENTRYPOINT ["/entry-point.sh"]
+# Default startup args.  Can be overwritten.  
+COPY entrypoint.sh /app/entrypoint.sh
+ENTRYPOINT ["/app/entrypoint.sh"]
+EXPOSE 8080
 CMD ["start"]

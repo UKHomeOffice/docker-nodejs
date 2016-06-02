@@ -27,4 +27,5 @@ ONBUILD RUN yum clean all && \
 COPY entrypoint.sh /app/entrypoint.sh
 ENTRYPOINT ["/app/entrypoint.sh"]
 EXPOSE 8080
+USER nodejs
 CMD ["start"]

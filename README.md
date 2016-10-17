@@ -8,7 +8,7 @@ This is an onbuild container for Node.JS Projects.
 
 This docker container is an `ONBUILD`. Simply extend the Dockerfile in your application with this Dockerfile and your 
 project will be copied into the `/app` directory and have `npm install` run on it.  You must ensure that your 
-downstream images sets USER nodejs and additionally in rare cases any required permission beyond read.
+downstream images sets USER nodejs and additionally in rare cases any required permission beyond read. You must also ensure that your application will listen on port 8080.
 
 Please note, storing state on this container is not recommended, and logs should be written to stdout, thus adding further 
 permissions isn't something we'd normally envision.

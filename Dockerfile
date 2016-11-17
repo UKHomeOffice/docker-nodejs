@@ -25,6 +25,7 @@ ONBUILD RUN yum clean all && \
 
 # Default startup args.  Can be overwritten.
 COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 ENTRYPOINT ["/app/entrypoint.sh"]
 EXPOSE 8080
 CMD ["start"]

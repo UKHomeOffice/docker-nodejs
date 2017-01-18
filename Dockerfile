@@ -1,4 +1,4 @@
-FROM quay.io/ukhomeofficedigital/nodejs-base:v4.4.7
+FROM quay.io/ukhomeofficedigital/nodejs-base:v6.9.1
 
         # Copy downstream in which should help
         # ensure everyone using this has a similar
